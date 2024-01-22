@@ -2,7 +2,7 @@
 
 namespace App\System;
 
-use App\Controllers\Home;
+use App\Controllers\HomeController;
 
 /**
  * Class App
@@ -18,7 +18,8 @@ class App
     public function start() : string
     {
         try {
-            $controller = new Home();
+            // Определяет контроллер и метод, который будет обрабатывать запрос
+            $controller = new HomeController();
             $method = 'index';
             return $controller->$method();
         } catch (\Exception $e) {
