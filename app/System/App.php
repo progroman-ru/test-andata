@@ -3,6 +3,7 @@
 namespace App\System;
 
 use App\Controllers\HomeController;
+use App\Models\Article;
 
 /**
  * Class App
@@ -18,12 +19,35 @@ class App
     public function start() : string
     {
         try {
-            // Определяет контроллер и метод, который будет обрабатывать запрос
-            $controller = new HomeController();
-            $method = 'index';
-            return $controller->$method();
+            $this->connection();
+            $route = $this->route();
+            return $this->response($route);
         } catch (\Exception $e) {
             return $e->getMessage();
         }
+    }
+
+    private function connection() : Connection
+    {
+        return new Connection(DBDRIVER, DBHOST, DBPORT, DBNAME, DBUSER, DBPASS);
+    }
+
+    /**
+     * Определяет контроллер и метод, который будет обрабатывать запрос
+     * @return array
+     */
+    private function route() : callable
+    {
+        return [new HomeController(), 'index'];
+    }
+
+    /**
+     * Запускает контроллер
+     * @param callable $controller
+     * @return string
+     */
+    private function response(callable $controller) : string
+    {
+        return call_user_func($controller);
     }
 }

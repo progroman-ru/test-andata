@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Entities\ArticleEntity;
+use App\Models\Article;
 
 /**
  * Class ArticlesService
@@ -11,8 +11,8 @@ use App\Entities\ArticleEntity;
  */
 class ArticlesService
 {
-    public function getById(int $id) : ArticleEntity
+    public function getById(int $id) : Article
     {
-        return new ArticleEntity([]);
+        return Article::where('id', $id)->first();
     }
 }

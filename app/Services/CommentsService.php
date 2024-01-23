@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use App\Models\Comment;
+use \Illuminate\Database\Eloquent\Collection;
+
 /**
  * Class CommentsService
  * Класс-сервис для работы с комментариями
@@ -9,8 +12,33 @@ namespace App\Services;
  */
 class CommentsService
 {
-    public function getCommentsForArticle(int $articleId) : array
+    /**
+     * Возвращает коллекцию комментариев для статьи
+     * @param int $articleId
+     * @return Collection
+     */
+    public function getCommentsForArticle(int $articleId) : Collection
     {
-        return [];
+        return Comment::with('user')->where('article_id', $articleId)->get();
+    }
+
+    public function create(array $data) : Comment
+    {
+        $this->validateBeforeCreate();
+        return Comment::create($data);
+    }
+
+    /**
+     * Валидация комментария перед вставкой в БД
+     * @return bool
+     * @throws \Exception
+     */
+    private function validateBeforeCreate()
+    {
+        if (false) {
+            throw new \Exception('Comment data not valid');
+        }
+
+        return true;
     }
 }

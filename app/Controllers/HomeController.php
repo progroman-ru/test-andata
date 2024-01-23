@@ -15,7 +15,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $articleId = 10;
+        $articleId = 1;
         $articleService = new ArticlesService();
         $article = $articleService->getById($articleId);
 

@@ -67,3 +67,34 @@ function echonl($message = '', $numNl = 1)
     $nl = is_cli_request() ? PHP_EOL : '<br>';
     echo $message, str_repeat($nl, $numNl);
 }
+
+function simple_backtrace($rows = 100)
+{
+    echo '<br>---------------------------<br>';
+
+    $backtraces = debug_backtrace(0);
+    unset($backtraces[0]);
+
+    $count = 0;
+    foreach ($backtraces as $row) {
+        if (isset($row['file'])) {
+            echo '<b>File:</b> ', $row['file'], ' (', $row['line'], '): ';
+        }
+
+        if (isset($row['class'])) {
+            echo '<b>Class: </b>', $row['class'] . $row['type'];
+        }
+
+        if (isset($row['function'])) {
+            echo $row['function'], '()';
+        }
+
+        echo '<br>';
+
+        if (++$count >= $rows) {
+            break;
+        }
+    }
+
+    echo '<br>---------------------------<br>';
+}

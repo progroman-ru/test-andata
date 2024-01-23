@@ -19,3 +19,18 @@ services:
       dockerfile: docker/Dockerfile
     volumes:
       - ../:/var/www/
+    depends_on:
+      - db
+
+  db:
+    container_name: app_db
+    image: mysql:5.7
+    restart: always
+    volumes:
+      - ./docker/tmp/db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: test-andata
+      MYSQL_ROOT_PASSWORD: 12345
+    ports:
+      - 8101:3306
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci

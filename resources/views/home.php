@@ -12,14 +12,12 @@
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-        <span class="fs-4"><?= $title ?></span>
+        <span class="fs-4"><?= $article->title ?></span>
       </a>
     </header>
     <article class="mb-4">
-      <h1>Lorem ipsum dolor sit amet</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In cursus turpis massa tincidunt dui ut ornare. Arcu dui vivamus arcu felis bibendum ut tristique et. Risus nullam eget felis eget nunc lobortis mattis. Odio tempor orci dapibus ultrices in iaculis nunc sed augue. Facilisi cras fermentum odio eu. Sit amet facilisis magna etiam tempor. Nunc sed blandit libero volutpat. Imperdiet proin fermentum leo vel orci porta non pulvinar. Vestibulum rhoncus est pellentesque elit ullamcorper. In mollis nunc sed id semper risus in hendrerit gravida. Sit amet porttitor eget dolor morbi non arcu. Adipiscing bibendum est ultricies integer quis auctor elit sed vulputate. Facilisis leo vel fringilla est ullamcorper eget nulla.</p>
-      <p>Ac placerat vestibulum lectus mauris ultrices eros. Integer feugiat scelerisque varius morbi enim. Magna ac placerat vestibulum lectus mauris ultrices eros in cursus. Scelerisque fermentum dui faucibus in. At tempor commodo ullamcorper a lacus vestibulum sed. Donec pretium vulputate sapien nec sagittis aliquam malesuada. Euismod elementum nisi quis eleifend quam adipiscing vitae proin sagittis. Morbi tristique senectus et netus et malesuada fames. Vulputate dignissim suspendisse in est ante in. Quis lectus nulla at volutpat diam. Tellus at urna condimentum mattis pellentesque id nibh tortor id. Eu consequat ac felis donec et odio pellentesque diam. Pulvinar mattis nunc sed blandit libero volutpat sed cras ornare. Vitae ultricies leo integer malesuada. Nunc id cursus metus aliquam eleifend mi in. Tristique nulla aliquet enim tortor at auctor urna nunc id.</p>
-      <p>In nulla posuere sollicitudin aliquam ultrices sagittis orci. Felis donec et odio pellentesque. Viverra justo nec ultrices dui. Praesent elementum facilisis leo vel fringilla. Sit amet luctus venenatis lectus magna. Nulla malesuada pellentesque elit eget gravida cum sociis. Porttitor eget dolor morbi non arcu. Adipiscing tristique risus nec feugiat in fermentum. Maecenas ultricies mi eget mauris. Facilisi morbi tempus iaculis urna. Arcu risus quis varius quam quisque id diam vel quam. Fermentum iaculis eu non diam phasellus vestibulum lorem. Sit amet mattis vulputate enim nulla aliquet porttitor lacus. Et sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque.</p>
+      <h1><?= $article->title ?></h1>
+      <?= $article->text ?>
     </article>
 
     <div class="border-top mb-4 pt-3 row">
@@ -54,15 +52,15 @@
       <div class="row d-flex justify-content-center">
           <div class="card shadow-0 border" style="background-color: #f0f2f5;">
             <div class="card-body p-4">
-              <?php for ($i = 0; $i < 5; $i++) { ?>
+              <?php foreach ($comments as $comment) { ?>
               <div class="card mb-4">
                 <div class="card-body">
-                  <h6 class="fw-semibold">Заголовок</h6>
-                  <p>Type your note, and hit enter to add it</p>
+                  <h6 class="fw-semibold"><?= $comment->title ?></h6>
+                    <?= $comment->text ?>
 
                   <div class="d-flex justify-content-between">
                     <div class="d-flex flex-row align-items-center">
-                      <p class="small mb-0 ms-2">Martha (test@test.com)</p>
+                      <p class="small mb-0 ms-2"><?= $comment->user->name ?> (<?= $comment->user->email ?>)</p>
                     </div>
                   </div>
                 </div>
